@@ -118,7 +118,7 @@ export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDeskt
   }
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 0' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px' }}>
       <span style={{ fontSize: '24px', fontWeight: 700, color: tokens.colors.foreground, letterSpacing: '-0.02em' }}>
         W
       </span>
