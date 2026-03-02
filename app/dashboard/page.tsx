@@ -1567,13 +1567,12 @@ export default function DashboardPage() {
         setTimeout(() => {
           setSortedToBottomIds((prev) => [...prev, move.id])
           const impact = parseImpact(IMPACT_SCORES[move.id] ?? '↑0% readiness potential')
-          const newScore = Math.min(100, scoreRef.current + impact)
           setScoreBonus((prev) => prev + impact)
           setTrajectoryOverride('↑ Just improved · AI recalculates daily')
 
-          // Step 6: success toast after 200ms
+          // Step 6: success toast after 200ms — read scoreRef after re-render
           setTimeout(() => {
-            setSuccessToast(`✓ Done — your readiness score updated to ${newScore}%`)
+            setSuccessToast(`✓ Done — your readiness score updated to ${scoreRef.current}%`)
             setTimeout(() => setSuccessToast(null), 3000)
           }, 200)
         }, 400)
@@ -1591,12 +1590,11 @@ export default function DashboardPage() {
       setTimeout(() => {
         setSortedToBottomIds((prev) => [...prev, move.id])
         const impact = parseImpact(IMPACT_SCORES[move.id] ?? '↑0% readiness potential')
-        const newScore = Math.min(100, scoreRef.current + impact)
         setScoreBonus((prev) => prev + impact)
         setTrajectoryOverride('↑ Just improved · AI recalculates daily')
 
         setTimeout(() => {
-          setSuccessToast(`✓ Done — your readiness score updated to ${newScore}%`)
+          setSuccessToast(`✓ Done — your readiness score updated to ${scoreRef.current}%`)
           setTimeout(() => setSuccessToast(null), 3000)
         }, 200)
       }, 400)
