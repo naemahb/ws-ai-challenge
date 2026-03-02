@@ -97,11 +97,6 @@ const AI_CONFIG: Record<
   },
 }
 
-const AI_WHY_TEXT: Record<NextMove['aiDecision'], string> = {
-  auto: 'This move has a clear optimal action based on your profile. No judgment call required — the AI can execute directly.',
-  needs_approval: 'The AI has analyzed your options and prepared a recommendation, but the final call is yours. Review the plan before anything moves.',
-  human_required: 'This decision involves trade-offs that depend on your personal values, risk tolerance, or circumstances the AI cannot fully assess. A human should be involved.',
-}
 
 const AI_RECOMMENDATIONS: Record<string, string> = {
   fhsa_maxed: 'Your FHSA is maxed for the year. With your home purchase timeline approaching, the AI recommends shifting to a conservative allocation — 60% fixed income, 40% equity — to reduce volatility risk in the 12–24 months before your planned purchase.',
@@ -1082,17 +1077,6 @@ const sectionLabelStyle: React.CSSProperties = {
   marginBottom: '6px',
 }
 
-const ctaButtonStyle: React.CSSProperties = {
-  width: '100%',
-  height: '48px',
-  backgroundColor: tokens.colors.foreground,
-  color: 'white',
-  fontSize: tokens.typography.scale.sm,
-  fontWeight: 500,
-  borderRadius: tokens.radius.pill,
-  border: 'none',
-  cursor: 'pointer',
-}
 
 // =============================================================================
 // WhatIfSection

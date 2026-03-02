@@ -497,7 +497,7 @@ function NextMovesSection({
               lineHeight: '1.5',
             }}
           >
-            Answer 9 quick questions and we'll rank your biggest opportunities — across all
+            Answer 9 quick questions and we&apos;ll rank your biggest opportunities — across all
             your accounts, not just Wealthsimple.
           </p>
           <button
