@@ -730,13 +730,6 @@ export default function HomePage() {
           </div>
         ) : (
           <div style={{ paddingBottom: '48px' }}>
-            <PortfolioHero
-              timeFilter={timeFilter}
-              onTimeFilterChange={setTimeFilter}
-              isDesktop={isDesktop}
-            />
-            <AccountsList isDesktop={isDesktop} />
-            <QuickActions isDesktop={isDesktop} />
             {ready && (
               <NextMovesSection
                 moves={moves}
@@ -745,6 +738,13 @@ export default function HomePage() {
                 isDesktop={isDesktop}
               />
             )}
+            <PortfolioHero
+              timeFilter={timeFilter}
+              onTimeFilterChange={setTimeFilter}
+              isDesktop={isDesktop}
+            />
+            <AccountsList isDesktop={isDesktop} />
+            <QuickActions isDesktop={isDesktop} />
           </div>
         )}
       </div>
