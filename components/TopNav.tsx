@@ -39,6 +39,11 @@ export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDeskt
     if (route) router.push(route)
   }
 
+  const handleReset = () => {
+    if (typeof window !== 'undefined') sessionStorage.clear()
+    router.push('/setup')
+  }
+
   if (isDesktop) {
     return (
       <nav
@@ -101,7 +106,9 @@ export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDeskt
             </span>
           </div>
           <BellIcon />
-          <AvatarIcon />
+          <div onClick={handleReset} style={{ cursor: 'pointer' }}>
+            <AvatarIcon />
+          </div>
         </div>
       </nav>
     )
@@ -114,7 +121,9 @@ export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDeskt
       </span>
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <BellIcon />
-        <AvatarIcon />
+        <div onClick={handleReset} style={{ cursor: 'pointer' }}>
+          <AvatarIcon />
+        </div>
       </div>
     </div>
   )
