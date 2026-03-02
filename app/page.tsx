@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useUserProfile } from '@/lib/UserProfileContext'
 import { calculateNextMoves } from '@/lib/scoring'
@@ -39,8 +40,14 @@ const MOCK_ACCOUNTS: { name: string; value: string; subtext: string | null; chev
   { name: 'Non-registered', value: '$847.00', subtext: null, chevron: false },
 ]
 
-// Upward-trending polyline; viewBox 0 0 300 80, y=80 is bottom
-const CHART_POINTS = '0,72 30,68 60,65 90,60 120,57 150,62 180,50 210,43 240,35 270,26 300,18'
+// Chart data per time filter — viewBox 0 0 300 80, y=80 is bottom
+const CHART_DATA: Record<TimeFilter, { points: string; path: string; gain: string; pct: string }> = {
+  '1M':  { points: '0,58 50,54 100,60 150,52 200,44 250,36 300,30', path: 'M0,58 50,54 100,60 150,52 200,44 250,36 300,30 L300,80 L0,80 Z', gain: '+$412', pct: '+2.77%' },
+  '3M':  { points: '0,68 50,62 100,58 150,55 200,50 250,40 300,30', path: 'M0,68 50,62 100,58 150,55 200,50 250,40 300,30 L300,80 L0,80 Z', gain: '+$1,204', pct: '+8.54%' },
+  '6M':  { points: '0,72 50,66 100,63 150,60 200,52 250,38 300,22', path: 'M0,72 50,66 100,63 150,60 200,52 250,38 300,22 L300,80 L0,80 Z', gain: '+$1,891', pct: '+14.1%' },
+  '1Y':  { points: '0,75 50,70 100,65 150,62 200,55 250,40 300,18', path: 'M0,75 50,70 100,65 150,62 200,55 250,40 300,18 L300,80 L0,80 Z', gain: '+$2,284', pct: '+17.6%' },
+  'ALL': { points: '0,72 30,68 60,65 90,60 120,57 150,62 180,50 210,43 240,35 270,26 300,18', path: 'M0,72 30,68 60,65 90,60 120,57 150,62 180,50 210,43 240,35 270,26 300,18 L300,80 L0,80 Z', gain: '+$2,847', pct: '+2.43%' },
+}
 
 // =============================================================================
 // PortfolioHero
@@ -73,9 +80,15 @@ function PortfolioHero({
       >
         $15,284.63
       </p>
-      <p style={{ fontSize: '14px', color: tokens.colors.success, marginTop: '6px' }}>
-        +$2,847 (+2.43%) all time →
-      </p>
+      <motion.p
+        key={timeFilter + '-gain'}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        style={{ fontSize: '14px', color: tokens.colors.success, marginTop: '6px' }}
+      >
+        {CHART_DATA[timeFilter].gain} ({CHART_DATA[timeFilter].pct}) {timeFilter === 'ALL' ? 'all time' : timeFilter} →
+      </motion.p>
 
       {/* SVG chart */}
       <div style={{ height: isDesktop ? '160px' : '80px', marginTop: '24px' }}>
@@ -91,20 +104,26 @@ function PortfolioHero({
               <stop offset="100%" stopColor="#3D7A5C" stopOpacity="0" />
             </linearGradient>
           </defs>
-          {/* Gradient fill under the line */}
-          <path
-            d="M0,72 30,68 60,65 90,60 120,57 150,62 180,50 210,43 240,35 270,26 300,18 L300,80 L0,80 Z"
+          <motion.path
+            key={timeFilter + '-fill'}
+            d={CHART_DATA[timeFilter].path}
             fill="url(#chartGradient)"
             stroke="none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           />
-          {/* Line on top */}
-          <polyline
-            points={CHART_POINTS}
+          <motion.polyline
+            key={timeFilter + '-line'}
+            points={CHART_DATA[timeFilter].points}
             fill="none"
             stroke={tokens.colors.success}
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           />
         </svg>
       </div>
