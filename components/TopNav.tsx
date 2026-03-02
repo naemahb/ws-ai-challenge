@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useUserProfile } from '@/lib/UserProfileContext'
 import { tokens } from '@/lib/tokens'
 
 const NAV_LINKS = ['Home', 'Household', 'Move', 'Activity', 'Tax', 'Mortgage', 'Next moves'] as const
@@ -33,6 +34,7 @@ function AvatarIcon() {
 
 export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDesktop: boolean }) {
   const router = useRouter()
+  const { setNextMoves } = useUserProfile()
 
   const handleNavClick = (link: NavLink) => {
     const route = NAV_ROUTES[link]
@@ -41,7 +43,8 @@ export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDeskt
 
   const handleReset = () => {
     if (typeof window !== 'undefined') sessionStorage.clear()
-    router.push('/setup')
+    setNextMoves([])
+    router.push('/')
   }
 
   if (isDesktop) {
