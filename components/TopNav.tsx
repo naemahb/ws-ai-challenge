@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useUserProfile } from '@/lib/UserProfileContext'
 import { tokens } from '@/lib/tokens'
 
@@ -35,6 +37,7 @@ function AvatarIcon() {
 export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDesktop: boolean }) {
   const router = useRouter()
   const { setNextMoves } = useUserProfile()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const handleNavClick = (link: NavLink) => {
     const route = NAV_ROUTES[link]
@@ -117,17 +120,102 @@ export function TopNav({ activeLink, isDesktop }: { activeLink: NavLink; isDeskt
     )
   }
 
+  // Mobile nav
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px' }}>
-      <span style={{ fontSize: '24px', fontWeight: 700, color: tokens.colors.foreground, letterSpacing: '-0.02em' }}>
-        W
-      </span>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <BellIcon />
-        <div onClick={handleReset} style={{ cursor: 'pointer' }}>
-          <AvatarIcon />
+    <>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px' }}>
+        <span style={{ fontSize: '24px', fontWeight: 700, color: tokens.colors.foreground, letterSpacing: '-0.02em' }}>
+          W
+        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <BellIcon />
+          <div onClick={handleReset} style={{ cursor: 'pointer' }}>
+            <AvatarIcon />
+          </div>
+          {/* Hamburger */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '5px' }}
+          >
+            <span style={{ display: 'block', width: 22, height: 1.5, backgroundColor: tokens.colors.foreground, borderRadius: 2 }} />
+            <span style={{ display: 'block', width: 22, height: 1.5, backgroundColor: tokens.colors.foreground, borderRadius: 2 }} />
+            <span style={{ display: 'block', width: 22, height: 1.5, backgroundColor: tokens.colors.foreground, borderRadius: 2 }} />
+          </button>
         </div>
       </div>
-    </div>
+
+      {/* Slide-in menu panel */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                position: 'fixed', inset: 0,
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                zIndex: 100,
+              }}
+            />
+            {/* Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+              style={{
+                position: 'fixed', top: 0, right: 0, bottom: 0,
+                width: '72%', maxWidth: '280px',
+                backgroundColor: tokens.colors.background,
+                zIndex: 101,
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '24px',
+              }}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setMenuOpen(false)}
+                style={{ alignSelf: 'flex-end', background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: '32px' }}
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 4l12 12M16 4L4 16" stroke={tokens.colors.foregroundMuted} strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </button>
+
+              {/* Nav links */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                {NAV_LINKS.map((link) => {
+                  const isActive = link === activeLink
+                  return (
+                    <span
+                      key={link}
+                      onClick={() => {
+                        setMenuOpen(false)
+                        handleNavClick(link)
+                      }}
+                      style={{
+                        fontSize: '18px',
+                        fontWeight: isActive ? 600 : 400,
+                        color: isActive ? tokens.colors.foreground : tokens.colors.foregroundMuted,
+                        padding: '10px 0',
+                        cursor: NAV_ROUTES[link] ? 'pointer' : 'default',
+                        borderBottom: `1px solid ${tokens.colors.border}`,
+                      }}
+                    >
+                      {link}
+                    </span>
+                  )
+                })}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
