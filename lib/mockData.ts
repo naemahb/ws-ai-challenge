@@ -210,16 +210,16 @@ export const SCENARIO_TEMPLATES: NextMoveTemplate[] = [
       { label: 'Goal alignment', weight: 0.3 },
     ],
     fullReasoning: {
-      warm: "At your income level, every dollar you put into an RRSP is worth more. You're likely in a 40%+ marginal bracket, so a $10,000 contribution could save you $4,000 or more in tax. Your limit is 18% of earned income, capped at $32,490 for 2025 — check your Notice of Assessment for your exact room. The March 2 deadline for the prior year is coming up; contributing before then locks in the deduction for last year's return.",
+      warm: "At your income level, every dollar you put into an RRSP is worth more. You're likely in a 40%+ marginal bracket, so a $10,000 contribution could save you $4,000 or more in tax. Your limit is 18% of earned income, capped at $32,490 for 2025 — check your Notice of Assessment for your exact room. Today is the March 2 deadline — the last day to contribute and claim the deduction on your 2025 tax return.",
       technical:
         'RRSP deduction value = contribution × marginal tax rate. At 100k+ income, marginal rate typically 37–53% depending on province. 2025 cap: $32,490. First 60 days of calendar year: contributions deductible against prior year. Optimal strategy: contribute when marginal rate is highest; consider deferring deduction to higher-income year if room allows. Coordinate with employer match and pension adjustment.',
     },
     oneLineSummary: {
-      warm: "At your income, RRSP contributions pack a big tax punch — up to $32K room, and the March deadline is soon.",
+      warm: "At your income, RRSP contributions pack a big tax punch — today is the last day to claim the deduction on your 2025 return.",
       technical: 'High marginal rate; RRSP deduction value maximized; $32,490 cap (2025); 60-day prior-year deadline applies.',
     },
     whatIsBlocking: 'RRSP room may be underutilized; high-income tax savings not fully captured.',
-    nextStep: 'Check your NOA for RRSP room; contribute before March 2 to claim on prior year, or contribute anytime for current year.',
+    nextStep: 'Check your NOA for RRSP room; contribute today (March 2) to claim on your 2025 return, or contribute anytime after for the 2026 tax year.',
     advisorNoteDefault: null,
   },
 
@@ -386,9 +386,9 @@ export const defaultAISignals: AISignal[] = [
     id: 'rrsp_deadline',
     type: 'deadline',
     severity: 'high',
-    title: 'RRSP deadline in 2 days',
-    why: 'The 60-day window for prior-year contributions closes March 2. Contributions after this date apply to the current tax year only.',
-    suggestedAction: 'Contribute now to claim the deduction on last year\'s return.',
+    title: 'RRSP deadline is today — last chance',
+    why: 'The 60-day window for prior-year RRSP contributions closes today, March 2. Any contributions made after today apply to the 2026 tax year only.',
+    suggestedAction: 'Contribute today to claim the deduction on your 2025 tax return.',
     impact: '↑8% readiness potential',
   },
   {
