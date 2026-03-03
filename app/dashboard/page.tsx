@@ -117,7 +117,9 @@ const IMPACT_SCORES: Record<string, string> = {
   rrsp_personal_vs_group: '↑8% readiness potential',
   rrsp_high_income: '↑5% readiness potential',
   tfsa_underutilized: '↑4% readiness potential',
+  tfsa_optimized: '↑3% readiness potential',
   fhsa_opportunity: '↑9% readiness potential',
+  fhsa_maxed: '↑4% readiness potential',
   employer_match: '↑7% readiness potential',
   db_pension_rrsp_room: '↑3% readiness potential',
   heloc_mortgage_vs_investing: '↑5% readiness potential',
@@ -1589,7 +1591,7 @@ export default function DashboardPage() {
 
       setTimeout(() => {
         setSortedToBottomIds((prev) => [...prev, move.id])
-        const impact = parseImpact(IMPACT_SCORES[move.id] ?? '↑0% readiness potential')
+        const impact = parseImpact(IMPACT_SCORES[move.id] ?? '↑4% readiness potential')
         setScoreBonus((prev) => prev + impact)
         setTrajectoryOverride('↑ Just improved · AI recalculates daily')
 
@@ -1732,6 +1734,7 @@ export default function DashboardPage() {
               isDesktop={isDesktop}
               onClose={() => setReviewMove(null)}
               onApprove={() => {
+                if (!reviewMove) return
                 const move = reviewMove
                 setReviewMove(null)
                 handleApproveMove(move)
