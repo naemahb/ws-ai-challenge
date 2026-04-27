@@ -30,12 +30,12 @@ The AI earns trust by being specific, not just helpful. Generic advice ("maximiz
 The human-in-the-loop boundary was the hardest design decision. I deliberately kept the final action decision with the user — not because the AI can't execute, but because the AI can't know what it doesn't know. That epistemic humility is what makes the system trustworthy.
 
 ## Tech stack     
-TypeScript — full-stack
-Claude API (Anthropic) — personalized action generation
-Vercel — deployment
-Built with Claude + Cursor (vibe-coded)
+TypeScript — full-stack  
+Claude API (Anthropic) — personalized action generation  
+Vercel — deployment  
+Built with Claude + Cursor (vibe-coded)  
 
 
-Why this matters
+### Why this matters
 The average Canadian doesn't have a financial advisor. They have a bank app and anxiety. This prototype shows that AI can close that gap — not by replacing human judgment, but by doing the monitoring, ranking, and articulation work that currently requires either professional help or significant personal finance expertise.
 The design challenge isn't technical. It's knowing exactly where the AI should stop and the human should begin.
