@@ -1,6 +1,9 @@
 **WS AI Challenge — Personal Finance AI Assistant**
+
 Live prototype: ws-ai-challenge.vercel.app
+
 Walkthrough: Loom demo
+
 Built for: Wealthsimple AI Builders Challenge
 
 **What this is**
