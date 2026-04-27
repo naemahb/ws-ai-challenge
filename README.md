@@ -1,6 +1,6 @@
 # WS AI Challenge — Personal Finance AI Assistant   
 
-Live prototype: [ws-ai-challenge.vercel.app](https://ws-ai-challenge.vercel.app/)
+Live prototype: [ws-ai-challenge.vercel.app](https://ws-ai-challenge.vercel.app/)  
 Built for: [Wealthsimple AI Builders Challenge](https://www.wealthsimple.com/en-ca/careers/ai-builders)
 
 ## What this is     
