@@ -1,8 +1,8 @@
 **WS AI Challenge — Personal Finance AI Assistant**
 
-Live prototype: ws-ai-challenge.vercel.app
-Walkthrough: Loom demo
-Built for: Wealthsimple AI Builders Challenge
+Live prototype: ws-ai-challenge.vercel.app  
+Walkthrough: Loom demo  
+Built for: Wealthsimple AI Builders Challenge  
 
 **What this is**
 A regular Canadian can now manage a complex multi-institution financial picture — RRSP, TFSA, FHSA, workplace pension, outstanding debt — and get a ranked, personalized action plan in under two minutes.
